@@ -1,0 +1,106 @@
+ReplicationController:
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myapp-rc
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+       - name: nginx-container
+         image: nginx
+  replicas: 3    
+
+
+
+
+ReplicaSet:
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-rs
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+       - name: nginx-container
+         image: nginx
+  replicas: 3
+  selector: 
+    matchLabels:
+      type: front-end
+
+
+
+
+
+Deployment:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deploy
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+       - name: nginx-container
+         image: nginx
+  replicas: 3
+  selector: 
+    matchLabels:
+      type: front-end
+      
+     
+ 
+SERVICES:
+Nodeport:
+     
+apiServer: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  type: NodePort
+  ports:
+   - port: 80
+     targetPort: 80
+     nodeport: 30008
+  selector:
+    app:myapp    
+    
+    
+    
+    
+    
+    
+    
