@@ -200,6 +200,30 @@ spec:
         image: registry.k8s.io/nginx-slim:0.8
         ports:
         - containerPort: 80
+        
+    
+    
+    
+    
+ Daemonset:   
+    
+        
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: monitoring-daemon
+spec:
+  selector:
+    matchLabels:
+      app: monitoring-agent
+  template:
+    metadata: 
+      labels:
+        app: monitoring-agent
+    spec:
+      containers:
+       - name: monitoring-agent
+         image: nginx        
     
     
     
